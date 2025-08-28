@@ -16,6 +16,7 @@ def index():
         return 'usuario inserido com sucesso!'
     except Exception as e:
         return f"Erro: {e}"
-   
-if __name__ == "__main__":
-    app.run(debug=True)
+        
+ if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=True)
+
