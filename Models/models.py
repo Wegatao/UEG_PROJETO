@@ -6,7 +6,7 @@ class Cricao_tabela:
     
     def __init__(self):
         self.db = Conexao()
-        cursor = self.db.get_cursor()
+        
 
     def set_criarUsuario(self):
         cursor = self.db.get_cursor()
@@ -32,6 +32,7 @@ class Cricao_tabela:
         finally:
             cursor.close()
 
-
-
+    def get_fechar(self):
+        return self.db.fechar()
        
+
