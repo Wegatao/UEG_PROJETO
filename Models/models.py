@@ -26,8 +26,8 @@ class Cricao_tabela:
     def set_inserirusuario(self, nome, email, senha, dataInscricao):
         cursor = self.db.get_cursor()
         try:
-            cursor.execute("insert into usuarios(nome, email, senha, dataIncricao) Values(%s,%s,%s,%s)",
-                       (nome, email, senha, dataIncricao))
+            cursor.execute("insert into usuarios(nome, email, senha, dataInscricao) Values(%s,%s,%s,%s)",
+                       (nome, email, senha, dataInscricao))
             self.db.commit()
         finally:
             cursor.close()
@@ -35,5 +35,6 @@ class Cricao_tabela:
     def get_fechar(self):
         return self.db.fechar()
        
+
 
 
