@@ -3,7 +3,7 @@ from mysql.connector import Error
 
 class Conexao:
 
-    def __init__(self, host="br268.hosgator.com.br", user="welber77_welber", password="Yeshua77*w", database="welber77_welberBancoDB"):
+    def __init__(self, host="127.0.0.1", user="root", password="Yeshua77*w", database="doacoes"):
         try:
             self.conexao = mysql.connector.connect(
                 host=host,
@@ -12,10 +12,8 @@ class Conexao:
                 database=database
             )
             self.cursor = self.conexao.cursor()
-            print("Conexão MySQL estabelecida com sucesso!")
         except Error as e:
             print("Erro ao conectar ao MySQL:", e)
-
 
     def get_conectar(self):
         return self.conexao
@@ -33,8 +31,3 @@ class Conexao:
         if self.conexao and self.conexao.is_connected():
             self.conexao.close()
             print("Conexão MySQL fechada.")
-
-
-
-
-
