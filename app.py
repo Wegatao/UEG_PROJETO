@@ -1,6 +1,6 @@
 from flask import Flask
 from Models.models import Cricao_tabela
-
+import os
 app = Flask(__name__)
 
 # Crie a conexão com seus dados MySQL
@@ -19,6 +19,7 @@ def index():
         
 if __name__ == "__main__":
         app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=True)
+
 
 
 
