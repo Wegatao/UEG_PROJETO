@@ -1,26 +1,22 @@
 from flask import Flask
-from Models.models import Cricao_tabela
-import os
+from connection.bd_connection import Conexao
 
 app = Flask(__name__)
 
 # Crie a conexão com seus dados MySQL
-criar = Cricao_tabela()
+criar = Conexao()
 
-@app.route("/", methods=["GET"])
+@app.route("/")
 def index():
 
     try:
-        criar.set_inserirusuario("welber", "@.com.br", "2332323", "2025-12-10")
-        criar.get_fechar()
-        return 'usuario inserido com sucesso!'
+        resultado = criar.set_inserirusuario("welber", "@.com.br", "2332323", "2025-12-10")
+        return ({'usuario inserido com sucesso!', resultado})
     
     except Exception as e:
         return f"Erro: {e}"
-        
+   
+
+criar.fechar()
 if __name__ == "__main__":
-    porta = int(os.environ.get("PORT", 5000))  # Pega a porta da Render ou usa 5000
-    app.run(host="0.0.0.0", port=porta, debug=True)
-
-
-
+    app.run(debug=True)
