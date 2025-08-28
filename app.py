@@ -11,7 +11,6 @@ criar = Cricao_tabela()
 def index():
 
     try:
-        criar.set_criarUsuario()
         criar.set_inserirusuario("welber", "@.com.br", "2332323", "2025-12-10")
         criar.get_fechar()
         return 'usuario inserido com sucesso!'
@@ -22,5 +21,6 @@ def index():
 if __name__ == "__main__":
     porta = int(os.environ.get("PORT", 5000))  # Pega a porta da Render ou usa 5000
     app.run(host="0.0.0.0", port=porta, debug=True)
+
 
 
