@@ -3,10 +3,7 @@ from mysql.connector import Error
 
 class Conexao:
 
-    def __init__(self, host="br268.hostgator.com.br", 
-                 user="welber77_welber", 
-                 password="Yeshua77*w", 
-                 database="welber77_welberBancoDB"):
+    def __init__(self, host="br268.hostgator.com.br", user="welber77_welber", password="Yeshua77*w", database="welber77_welberBancoDB"):
         try:
             self.conexao = mysql.connector.connect(
                 host=host,
@@ -31,7 +28,7 @@ class Conexao:
             """)
             self.conexao.commit()
         finally:
-            cursor.close()
+            cursor.close()  # só fecha o cursor, mantém a conexão aberta
 
     def set_inserirusuario(self, nome, email, senha, dataInscricao):
         cursor = self.conexao.cursor()
@@ -45,7 +42,7 @@ class Conexao:
         except Error as e:
             return e
         finally:
-            cursor.close()
+            cursor.close()  # só fecha o cursor
 
     def fechar(self):
         if self.conexao and self.conexao.is_connected():
