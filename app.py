@@ -1,5 +1,6 @@
 from flask import Flask
 from Models.models import Cricao_tabela
+import os
 
 app = Flask(__name__)
 
@@ -17,6 +18,8 @@ def index():
     
     except Exception as e:
         return f"Erro: {e}"
-   
+        
 if __name__ == "__main__":
-    app.run(debug=True)
+    porta = int(os.environ.get("PORT", 5000))  # Pega a porta da Render ou usa 5000
+    app.run(host="0.0.0.0", port=porta, debug=True)
+
