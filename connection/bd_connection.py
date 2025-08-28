@@ -28,7 +28,7 @@ class Conexao:
                 )""")
             self.conexao.commit()
         finally:
-            self.cursor.close()
+            print('fim')
 
     def set_inserirusuario(self, nome, email, senha, dataInscricao):
         cursor = self.cursor
@@ -36,11 +36,11 @@ class Conexao:
             cursor.execute("insert into usuarios(nome, email, senha, dataInscricao) Values(%s,%s,%s,%s)",
                        (nome, email, senha, dataInscricao))
             self.conexao.commit()
-            return ({'mensagem':'ok'})
+            return 'mensagem ok'
         except Error as e:
             return e
         finally:
-            self.cursor.close()
+            print('fim')
 
 
     def fechar(self):
