@@ -15,15 +15,33 @@ class Conexao:
         except Error as e:
             print("Erro ao conectar ao MySQL:", e)
 
-    def get_conectar(self):
-        return self.conexao
-
-    def get_cursor(self):
-        return self.cursor
-
-    def commit(self):
-        if self.conexao:
+    def set_criarUsuario(self):
+        cursor = self.cursor
+        try:
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS usuarios (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    nome VARCHAR(255) NOT NULL,
+                    email VARCHAR(255),
+                    senha VARCHAR(255) NOT NULL,
+                    dataInscricao DATE NOT NULL
+                )""")
             self.conexao.commit()
+        finally:
+            self.cursor.close()
+
+    def set_inserirusuario(self, nome, email, senha, dataInscricao):
+        cursor = self.cursor
+        try:
+            cursor.execute("insert into usuarios(nome, email, senha, dataInscricao) Values(%s,%s,%s,%s)",
+                       (nome, email, senha, dataInscricao))
+            self.conexao.commit()
+            return ({'mensagem':'ok'})
+        except Error as e:
+            return e
+        finally:
+            self.cursor.close()
+
 
     def fechar(self):
         if self.cursor:
@@ -31,4 +49,5 @@ class Conexao:
         if self.conexao and self.conexao.is_connected():
             self.conexao.close()
             print("Conexão MySQL fechada.")
+
 
