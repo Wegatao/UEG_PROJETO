@@ -11,7 +11,7 @@ def index():
 
     try:
         resultado = criar.set_inserirusuario("welber", "@.com.br", "2332323", "2025-12-10")
-        return ({'usuario inserido com sucesso!', resultado})
+        return f'usuario inserido com sucesso!${resultado}'
     
     except Exception as e:
         return f"Erro: {e}"
