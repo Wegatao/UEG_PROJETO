@@ -1,26 +1,25 @@
 from flask import Flask
+from flask import Flask, jsonify
 from connection.bd_connection import Conexao
+from connection.confing import CONFING
 import os
 
-app = Flask(__name__)
 
-# Crie a conexão com seus dados MySQL
-criar = Conexao()
+app = Flask(__name__)
+conexao = Conexao(CONFING)
 
 @app.route("/")
 def index():
-
-    try:
-        resultado = criar.set_inserirusuario("welber", "@.com.br", "2332323", "2025-12-10")
-        return f'usuario inserido com sucesso!${resultado}'
+    return jsonify('esta tudo certo')
     
-    except Exception as e:
-        return f"Erro: {e}"
-   
 
-criar.fechar()
+@app.route("/InserirNovoUsuario", methods=["POST"])
+def cadastrarPessoa():
+    dados = ('welber','111','wewew',1010)
+    resultado = conexao.set_inserirusuario(dados)
+    return jsonify(resultado), 200 if resultado.get("sucesso") else 400
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
-
